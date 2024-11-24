@@ -2,6 +2,7 @@ import { useParams, useLoaderData } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import { FaArrowLeft } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { FaMapMarker } from 'react-icons/fa';
 
 const JobsPage = () => {
   const job = useLoaderData();
@@ -30,9 +31,9 @@ const JobsPage = () => {
               <div className="bg-white p-6 rounded-lg shadow-md text-center md:text-left">
                 <div className="text-gray-500 mb-4">{job.type}</div>
                 <h1 className="text-3xl font-bold mb-4">{job.title}</h1>
-                <div className="text-gray-500 mb-4 flex align-middle justify-center md:justify-start">
-                  <i className="fa-solid fa-location-dot text-lg text-orange-700 mr-2"></i>
-                  <p className="text-orange-700">{job.location}</p>
+                <div className="text-gray-500 mb-4 flex df align-middle justify-center md:justify-start">
+                  
+                  <p className="text-orange-700"><FaMapMarker />{job.location}</p>
                 </div>
               </div>
 
@@ -48,10 +49,9 @@ const JobsPage = () => {
             <div class="bg-white p-6 rounded-lg shadow-md">
               <h3 class="text-xl font-bold mb-6">Company Info</h3>
 
-              <h2 class="text-2xl">NewTek Solutions</h2>
+              <h2 class="text-2xl">{job.company.name}</h2>
 
-              <p class="my-2">
-                NewTek Solutions is a leading technology company specializing in web development and digital solutions. We pride ourselves on delivering high-quality products and services to our clients while fostering a collaborative and innovative work environment.
+              <p class="my-2">{job.company.description}
               </p>
 
               <hr class="my-4" />
@@ -59,18 +59,18 @@ const JobsPage = () => {
               <h3 class="text-xl">Contact Email:</h3>
 
               <p class="my-2 bg-indigo-100 p-2 font-bold">
-                contact@newteksolutions.com
+                {job.company.contactEmail}
               </p>
 
               <h3 class="text-xl">Contact Phone:</h3>
 
-              <p class="my-2 bg-indigo-100 p-2 font-bold">555-555-5555</p>
+              <p class="my-2 bg-indigo-100 p-2 font-bold">{job.company.contactPhone}</p>
             </div>
 
             <div class="bg-white p-6 rounded-lg shadow-md mt-6">
               <h3 class="text-xl font-bold mb-6">Manage Job</h3>
               <Link
-                to="/add-job.html"
+                to={`/jobs/edit/${job.id}`}
                 class="bg-indigo-500 hover:bg-indigo-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
                 >Edit Job</Link              >
               <button
